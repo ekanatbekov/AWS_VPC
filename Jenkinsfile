@@ -13,8 +13,7 @@ pipeline {
             steps {
               withEnv(["env_name=${params.env_name}"]) {
                 script {
-                    sh 'wget --quiet  https://releases.hashicorp.com/terraform/1.2.7/terraform_1.2.7_linux_amd64.zip && unzip terraform_1.2.7_linux_amd64.zip'
-                    sh 'yes'
+                    sh 'wget --quiet  https://releases.hashicorp.com/terraform/1.2.7/terraform_1.2.7_linux_amd64.zip && unzip terraform_1.2.7_linux_amd64.zip -y'
                     sh 'terraform version'
                     sh  'terraform init -backend-config=env/config.npe.tfbackend'
                     sh 'terraform plan -var-file=env/dev.tfvars'
