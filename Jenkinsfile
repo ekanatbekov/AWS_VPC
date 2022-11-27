@@ -31,10 +31,10 @@ pipeline {
             steps {
                input message: 'Good to go? (CLick "Proceed" to continue)'  
             }
+        }
         stage('Terraform apply') {
             steps {
               sh 'terraform apply -auto-approve'
             }
         }
     }
-}
