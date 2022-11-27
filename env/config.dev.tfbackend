@@ -1,0 +1,3 @@
+    bucket = "project-kke"
+    key    = "vpc/dev/state"
+    region = "us-west-1"
