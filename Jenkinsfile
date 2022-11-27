@@ -14,13 +14,13 @@ pipeline {
               withEnv(["env_name=${params.env_name}"]) {
                 script {
                     sh 'wget --quite https://releases.hashicorp.com/terraform/1.2.7/terraform_1.2.7_linux_amd64.zip && unzip terraform_1.2.7_linux_amd64.zip'
-                    sh './terraform version'
+                    sh '/terraform version'
                     sh(script: '''#!/bin/bash
                     if [$env_name != "uat" ] || [$env_name != "prod"]
                     then
-                      ./terraform init -backend-config=env/config.npe.tfbackend
+                      terraform init -backend-config=env/config.npe.tfbackend
                     else 
-                      ./terraform init -backend-config=env/config.prod.tfbackend
+                      terraform init -backend-config=env/config.prod.tfbackend
                     fi
                     '''.scriptIndent())
                 }
