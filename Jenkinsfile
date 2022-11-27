@@ -20,13 +20,15 @@ node('master') {
 }
 
 pipeline {
-    agent any 
-    stages{
-        stage('Git Checkout')
+    agent {
+      lable 'any'
+    } 
+    stages {
+        stage ('Git Checkout')
           steps {
             git branch: 'main', url: 'git@github.com:ekanatbekov/AWS_VPC.git'
           }
-        stage('Terraform Plan')
+        stage ('Terraform Plan')
           steps {
             withEnv(["env_name=${params.env_name}"]) {
                 script {
