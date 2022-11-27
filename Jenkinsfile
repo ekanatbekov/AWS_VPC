@@ -21,8 +21,8 @@ node('master') {
 
 pipeline {
     agent any 
-    stages {
-        stage('Git Checkout')
+    stages{
+        stages('Git Checkout')
           steps{
             git branch: 'main', url: 'git@github.com:ekanatbekov/AWS_VPC.git'
           }
