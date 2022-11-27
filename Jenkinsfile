@@ -1,6 +1,3 @@
 properties([
-    parameters(
-        [choice(choice: ['dev', 'qa', 'uat', 'prod', 'local'], description: 'please select environment', name: 'env_name')]
-    )
-])
-
+  parameters([choice(choices: ['dev', 'qa', 'local', 'prod', 'uat'], description: 'Please choose an env', name: 'env')]
+  )])
