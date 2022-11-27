@@ -13,7 +13,7 @@ pipeline {
             steps {
               withEnv(["env_name=${params.env_name}"]) {
                 script {
-                    sh 'wget --quite https://releases.hashicorp.com/terraform/1.2.7/terraform_1.2.7_linux_amd64.zip && unzip terraform_1.2.7_linux_amd64.zip'
+                    sh 'wget  https://releases.hashicorp.com/terraform/1.2.7/terraform_1.2.7_linux_amd64.zip && unzip terraform_1.2.7_linux_amd64.zip'
                     sh '/terraform version'
                     sh(script: '''#!/bin/bash
                     if [$env_name != "uat" ] || [$env_name != "prod"]
@@ -23,6 +23,7 @@ pipeline {
                       terraform init -backend-config=env/config.prod.tfbackend
                     fi
                     '''.scriptIndent())
+                    sh 'terraform plan -var-file=env/dev.tfvars'
                 }
             }
           }
@@ -34,7 +35,7 @@ pipeline {
         }
         stage('Terraform apply') {
             steps {
-              sh 'terraform apply -auto-approve'
+              sh 'terraform apply -var-file=env/dev.tfvars -auto-approve'
             }
         }
     }
