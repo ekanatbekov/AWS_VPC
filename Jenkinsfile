@@ -22,12 +22,12 @@ node('master') {
 pipeline {
     agent any 
     stages{
-        stages('Git Checkout')
-          steps{
+        stage('Git Checkout')
+          steps {
             git branch: 'main', url: 'git@github.com:ekanatbekov/AWS_VPC.git'
           }
         stage('Terraform Plan')
-          steps{
+          steps {
             withEnv(["env_name=${params.env_name}"]) {
                 script {
                     sh 'wget --quite https://releases.hashicorp.com/terraform/1.2.7/terraform_1.2.7_linux_amd64.zip && unzip terraform_1.2.7_linux_amd64.zip'
